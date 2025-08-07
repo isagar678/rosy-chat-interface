@@ -19,6 +19,7 @@ interface Chat {
 interface ChatSidebarProps {
   className?: string;
   onChatSelect?: (chatId: string) => void;
+  selectedChatId?: string;
 }
 
 const mockChats: Chat[] = [
@@ -57,7 +58,7 @@ const mockChats: Chat[] = [
   },
 ];
 
-export function ChatSidebar({ className, onChatSelect }: ChatSidebarProps) {
+export function ChatSidebar({ className, onChatSelect, selectedChatId }: ChatSidebarProps) {
   return (
     <div className={cn("w-80 bg-chat-sidebar border-r border-border flex flex-col", className)}>
       {/* Header */}
@@ -86,7 +87,7 @@ export function ChatSidebar({ className, onChatSelect }: ChatSidebarProps) {
               onClick={() => onChatSelect?.(chat.id)}
               className={cn(
                 "flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-colors hover:bg-accent/50",
-                chat.isActive && "bg-accent"
+                selectedChatId === chat.id && "bg-accent"
               )}
             >
               <div className="relative">
